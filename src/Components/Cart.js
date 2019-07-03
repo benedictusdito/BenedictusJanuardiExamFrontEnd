@@ -67,15 +67,13 @@ class Cart extends Component {
     // Menampung hasil perkalian
     var totalHarga = 0;
     for (let i = 0; i < this.state.myCart.length; i++) {
-      if (this.props.dataState.id === this.state.myCart[i].idUser) {
-        {
-          totalHarga += parseInt(
-            this.state.myCart[i].quantitiy * this.state.myCart[i].price
-          );
-        }
+      {
+        totalHarga += parseInt(
+          this.state.myCart[i].quantitiy * this.state.myCart[i].price
+        );
       }
     }
-    return <td>Rp. {totalHarga.toLocaleString()}</td>;
+    return totalHarga;
   };
 
   renderList = () => {
@@ -88,15 +86,14 @@ class Cart extends Component {
         if (item.idUser === this.props.dataState.id) {
           return (
             <tr>
-              <td>{item.idProduct}</td>
               <td>
                 <img className="list" src={item.src} />
               </td>
-
+              <td>{item.idProduct}</td>
               <td>{item.namaProduct}</td>
               <td scope="col"> Rp.{item.price.toLocaleString()} </td>
               <td>{item.quantitiy}</td>
-              <td>{item.quantitiy * item.price}</td>
+              <td scope="col"> Rp. {this.hargaTotal().toLocaleString()}</td>
               <td>
                 <button
                   className="btn btn-danger"
@@ -164,11 +161,10 @@ class Cart extends Component {
         if (item.idUser === this.props.dataState.id) {
           return (
             <tr>
-              <td>{item.idProduct}</td>
               <td>
                 <img className="list" src={item.src} />
               </td>
-
+              <td>{item.idProduct}</td>
               <td>{item.namaProduct}</td>
               <td scope="col"> Rp.{item.price.toLocaleString()} </td>
               <td>{item.quantitiy}</td>
@@ -245,11 +241,11 @@ class Cart extends Component {
             <thead>
               <tr>
                 <th>
-                  <center> Id </center>
+                  <center> Gambar </center>
                 </th>
 
                 <th>
-                  <center> Gambar </center>
+                  <center> Id </center>
                 </th>
 
                 <th>Name</th>
@@ -294,6 +290,7 @@ class Cart extends Component {
                     Checkout
                   </button>
                 </div> */}
+                <tr />
                 <Checkout cart={this.state.checkout} />
               </tr>
             </tbody>
@@ -305,42 +302,41 @@ class Cart extends Component {
           ) : (
             ""
           )}
-        </div>
-        <div>
-          <Button className="center" color="danger" onClick={this.toggle}>
-            Bayar Sekarang
-          </Button>
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.toggle}
-            className={this.props.className}
-          >
-            <ModalHeader toggle={this.toggle}>TOTAL</ModalHeader>
-            <ModalBody className="table table-hover border bg-white">
-              <table>
-                <thead>
-                  <tr>
-                    <th>
-                      <center> Id </center>
-                    </th>
+          <div>
+            <Button className="center" color="danger" onClick={this.toggle}>
+              Check Out
+            </Button>
+            <Modal
+              isOpen={this.state.modal}
+              toggle={this.toggle}
+              className={this.props.className}
+            >
+              <ModalHeader toggle={this.toggle}>TOTAL</ModalHeader>
+              <ModalBody className="table table-hover border bg-white">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>
+                        <center> Gambar </center>
+                      </th>
 
-                    <th>
-                      <center> Gambar </center>
-                    </th>
+                      <th>
+                        <center> Id </center>
+                      </th>
 
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.checkOut()}
-                  <tr>
-                    <td />
-                    <td />
-                    <td />
-                    {/* <td>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.checkOut()}
+                    <tr>
+                      <td />
+                      <td />
+                      <td />
+                      {/* <td>
                       <thead>
                         <p>Total Belanjaan:</p>
                       </thead>
@@ -348,8 +344,8 @@ class Cart extends Component {
                     <td>
                       <p>Rp. {this.hargaTotal()}</p>
                     </td> */}
-                    <td>
-                      {/* <button
+                      <td>
+                        {/* <button
                     className="btn btn-warning text-white"
                     onClick={() => this.checkOut()}
                   >
@@ -360,24 +356,25 @@ class Cart extends Component {
                     />{" "}
                     Check Out{" "}
                   </button> */}
-                    </td>
-                    <td />
-                  </tr>
-                </tbody>
-              </table>
-              <p>
-                <h1>Total Rp. {this.hargaTotal()}</h1>
-              </p>
-              <ModalFooter>
-                <Button color="primary" onClick={this.toggle}>
-                  Bayar
-                </Button>{" "}
-                <Button color="secondary" onClick={this.toggle}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </ModalBody>
-          </Modal>
+                      </td>
+                      <td />
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  <h1>Total Rp. {this.hargaTotal()}</h1>
+                </p>
+                <ModalFooter>
+                  <Button color="primary" onClick={this.toggle}>
+                    Bayar
+                  </Button>{" "}
+                  <Button color="secondary" onClick={this.toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </ModalBody>
+            </Modal>
+          </div>
         </div>
       </div>
     );

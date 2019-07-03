@@ -142,9 +142,7 @@ class Header extends Component {
                   </DropdownItem>
                   <DropdownItem>
                     {" "}
-                    <Link to="./cart">
-                      Jumlah Belanjaan: {this.totalQuantity()}
-                    </Link>
+                    <Link to="./cart">Cart</Link>
                   </DropdownItem>
                   <DropdownItem divider />
                   <Button

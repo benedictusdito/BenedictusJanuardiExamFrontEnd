@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Axios from "axios";
 
@@ -62,25 +62,25 @@ class Checkout extends React.Component {
     return totalHarga;
   };
 
-  renderCheckout = () => {
-    console.log(this.state.myCart);
-    var hasil = this.state.myCart.map(item => {
-      return (
-        <tr>
-          <td scope="col"> {item.idProduct} </td>
-          <td>{item.namaProduct}</td>
-          <td>Rp. {item.price}</td>
-          <td scope="col"> {item.quantity} </td>
-          <td scope="col"> Rp.{item.price.toLocaleString()} </td>
-          <td scope="col">
-            {" "}
-            ${(item.price * item.quantity).toLocaleString()}{" "}
-          </td>
-        </tr>
-      );
-    });
-    return hasil;
-  };
+  // renderCheckout = () => {
+  //   console.log(this.state.myCart);
+  //   var hasil = this.state.myCart.map(item => {
+  //     return (
+  //       <tr>
+  //         <td scope="col"> {item.idProduct} </td>
+  //         <td>{item.namaProduct}</td>
+  //         <td>Rp. {item.price}</td>
+  //         <td scope="col"> {item.quantity} </td>
+  //         <td scope="col"> Rp.{item.price.toLocaleString()} </td>
+  //         <td scope="col">
+  //           {" "}
+  //           ${(item.price * item.quantity).toLocaleString()}{" "}
+  //         </td>
+  //       </tr>
+  //     );
+  //   });
+  //   return hasil;
+  // };
 
   renderList = () => {
     return this.state.myCart.map(item => {
@@ -211,7 +211,7 @@ class Checkout extends React.Component {
               </td>
               <td scope="col"> </td>
               <td scope="col"> </td>
-              <td scope="col"> {this.hargaTotal()}</td>
+              <td scope="col"> Rp. {this.hargaTotal().toLocaleString()}</td>
             </tr>
           </tbody>
         </table>
